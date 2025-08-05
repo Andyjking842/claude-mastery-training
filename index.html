@@ -1,0 +1,2109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30-Day Claude Mastery Program</title>
+    <style>
+        :root {
+            --primary-teal: #00897B;
+            --purple: #673AB7;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --medium-gray: #E0E0E0;
+            --dark-gray: #757575;
+            --text-dark: #212121;
+            --info: #2196F3;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --error: #F44336;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--light-gray);
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .user-selection {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .title-large {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 24px;
+        }
+
+        .description {
+            font-size: 16px;
+            color: var(--dark-gray);
+            margin-bottom: 32px;
+        }
+
+        .user-input-section {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .text-input {
+            padding: 10px 16px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 4px;
+            font-size: 16px;
+            min-width: 200px;
+            text-align: center;
+            background: var(--white);
+            color: var(--text-dark);
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--primary-teal);
+            box-shadow: 0 0 0 2px rgba(0, 137, 123, 0.2);
+        }
+
+        .btn {
+            height: 40px;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary-teal);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #00695C;
+        }
+
+        .btn-secondary {
+            background: var(--light-gray);
+            color: var(--text-dark);
+            border: 1px solid var(--medium-gray);
+        }
+
+        .btn-secondary:hover {
+            background: var(--medium-gray);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--dark-gray);
+        }
+
+        .btn-ghost:hover {
+            background: var(--light-gray);
+        }
+
+        .user-chip {
+            display: inline-block;
+            background: var(--white);
+            border: 1px solid var(--medium-gray);
+            padding: 8px 16px;
+            margin: 4px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+
+        .user-chip:hover {
+            border-color: var(--primary-teal);
+            background: var(--light-gray);
+        }
+
+        .user-chip.active {
+            background: var(--primary-teal);
+            color: var(--white);
+            border-color: var(--primary-teal);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .main-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .current-user {
+            background: var(--primary-teal);
+            color: var(--white);
+            padding: 8px 24px;
+            border-radius: 4px;
+            display: inline-block;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        .main-content {
+            display: none;
+        }
+
+        .main-content.active {
+            display: block;
+        }
+
+        .progress-bar {
+            background: var(--medium-gray);
+            border-radius: 4px;
+            padding: 2px;
+            margin: 24px 0;
+            position: relative;
+        }
+
+        .progress-fill {
+            background: var(--success);
+            height: 20px;
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.3s ease;
+            position: relative;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--white);
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border: 1px solid var(--medium-gray);
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+        }
+
+        .stat-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-teal);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--dark-gray);
+        }
+
+        .week-section {
+            background: var(--white);
+            border: 1px solid var(--medium-gray);
+            border-radius: 8px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .week-header {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .week-header:hover {
+            background: var(--dark-gray);
+        }
+
+        .week-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .week-content.expanded {
+            max-height: 15000px;
+        }
+
+        .chevron {
+            transition: transform 0.3s ease;
+            font-size: 18px;
+        }
+
+        .chevron.rotated {
+            transform: rotate(180deg);
+        }
+
+        .day-card {
+            border-left: 4px solid var(--warning);
+            margin: 24px;
+            padding: 24px;
+            background: var(--light-gray);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .day-card.completed {
+            border-left-color: var(--success);
+            background: #E8F5E8;
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .day-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .complete-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .day-content {
+            line-height: 1.6;
+        }
+
+        .exercise, .experiment {
+            margin: 8px 0;
+            padding: 16px;
+            border-radius: 4px;
+        }
+
+        .exercise {
+            background: #E3F2FD;
+            border-left: 4px solid var(--info);
+        }
+
+        .experiment {
+            background: #EDE7F6;
+            border-left: 4px solid var(--purple);
+        }
+
+        .tracking-section {
+            margin-top: 24px;
+            padding: 16px;
+            background: var(--white);
+            border-radius: 4px;
+            border: 1px dashed var(--medium-gray);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 4px;
+            color: var(--text-dark);
+            font-size: 14px;
+        }
+
+        .textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 4px;
+            min-height: 80px;
+            resize: vertical;
+            background: var(--white);
+            color: var(--text-dark);
+        }
+
+        .textarea:focus {
+            outline: none;
+            border-color: var(--primary-teal);
+            box-shadow: 0 0 0 2px rgba(0, 137, 123, 0.2);
+        }
+
+        .save-btn {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        .save-btn:hover {
+            background: #45A049;
+        }
+
+        .user-management {
+            text-align: center;
+            margin-top: 32px;
+        }
+
+        .user-management .btn {
+            margin: 0 8px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background: var(--white);
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 8px;
+            width: 95%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            background: var(--primary-teal);
+            color: var(--white);
+            padding: 24px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close {
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+            opacity: 0.8;
+        }
+
+        .close:hover {
+            opacity: 1;
+        }
+
+        .modal-body {
+            padding: 32px;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .summary-card {
+            background: var(--light-gray);
+            padding: 24px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--medium-gray);
+            transition: all 0.2s ease;
+        }
+
+        .summary-card:hover {
+            border-color: var(--primary-teal);
+            box-shadow: 0 2px 8px rgba(0, 137, 123, 0.1);
+        }
+
+        .summary-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-teal);
+            margin-bottom: 4px;
+        }
+
+        .summary-label {
+            font-size: 14px;
+            color: var(--dark-gray);
+            font-weight: 500;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 24px 0;
+        }
+
+        .participant-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--medium-gray);
+        }
+
+        .participant-table th {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .participant-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--light-gray);
+            vertical-align: middle;
+        }
+
+        .participant-table tbody tr:hover {
+            background-color: var(--light-gray);
+        }
+
+        .progress-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mini-progress-bar {
+            flex-grow: 1;
+            height: 8px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .mini-progress-fill {
+            height: 100%;
+            background: var(--success);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-percentage {
+            font-weight: 500;
+            color: var(--text-dark);
+            min-width: 35px;
+            font-size: 14px;
+        }
+
+        .streak-badge {
+            background: var(--warning);
+            color: var(--white);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .streak-badge.high {
+            background: var(--success);
+        }
+
+        .streak-badge.medium {
+            background: var(--info);
+        }
+
+        .last-active {
+            font-size: 14px;
+            color: var(--dark-gray);
+        }
+
+        .last-active.recent {
+            color: var(--success);
+            font-weight: 500;
+        }
+
+        .report-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .export-btn, .copy-btn {
+            background: var(--primary-teal);
+            color: var(--white);
+            border: none;
+            padding: 8px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .export-btn:hover, .copy-btn:hover {
+            background: #00695C;
+        }
+
+        .copy-btn {
+            background: var(--success);
+        }
+
+        .copy-btn:hover {
+            background: #45A049;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+            
+            .day-card {
+                margin: 8px;
+                padding: 16px;
+            }
+
+            .user-input-section {
+                flex-direction: column;
+            }
+
+            .modal-content {
+                width: 98%;
+                margin: 1% auto;
+            }
+
+            .summary-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <!-- User Selection Screen -->
+        <div id="userSelection" class="user-selection">
+            <h2 class="title-large">👋 Welcome to the 30-Day Claude Mastery Program</h2>
+            <p class="description">Enter your name to track your progress, or select an existing user:</p>
+            
+            <div class="user-input-section">
+                <input type="text" id="userNameInput" class="text-input" placeholder="Enter your name..." maxlength="30">
+                <button onclick="setUser()" class="btn btn-primary">Start Journey</button>
+            </div>
+
+            <div class="existing-users">
+                <p style="margin-bottom: 16px; color: var(--dark-gray);"><strong>Existing Users:</strong></p>
+                <div id="existingUsersList"></div>
+            </div>
+        </div>
+
+        <!-- Main Program Content -->
+        <div id="mainContent" class="main-content">
+            <div class="header">
+                <div class="current-user">
+                    📚 <span id="currentUserName"></span>'s Journey
+                </div>
+                <h1 class="main-title">🎯 30-Day Claude Mastery Program</h1>
+                <p class="description">Transform your AI skills in just 5 minutes a day</p>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="completedDays">0</div>
+                    <div class="stat-label">Days Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="currentStreak">0</div>
+                    <div class="stat-label">Current Streak</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="artifactsCreated">0</div>
+                    <div class="stat-label">Artifacts Created</div>
+                </div>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill">
+                    <div class="progress-text" id="progressText">0% Complete</div>
+                </div>
+            </div>
+
+            <!-- Week 1: Beyond Text - Visual & Interactive Content -->
+            <div class="week-section">
+                <div class="week-header" onclick="toggleWeek(1)">
+                    <h2 style="margin: 0;">Week 1: Beyond Text - Visual & Interactive Content</h2>
+                    <span class="chevron" id="chevron1">▼</span>
+                </div>
+                <div class="week-content" id="week1">
+                    <!-- Day 1 -->
+                    <div class="day-card" data-day="1">
+                        <div class="day-header">
+                            <div class="day-title">Day 1: HTML Artifacts Basics</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(1)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Ask Claude to create a simple personal dashboard with your name, favorite quotes, and clickable buttons that change colors
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Try: "Create an HTML page that's a digital business card for me with hover effects"
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact1" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection1" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(1)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 2 -->
+                    <div class="day-card" data-day="2">
+                        <div class="day-header">
+                            <div class="day-title">Day 2: SVG Graphics & Diagrams</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(2)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Create a flowchart of your morning routine as an SVG
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Ask for infographics, mind maps, or process diagrams about topics you're learning
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact2" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection2" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(2)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 3 -->
+                    <div class="day-card" data-day="3">
+                        <div class="day-header">
+                            <div class="day-title">Day 3: Interactive Forms & Calculators</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(3)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Create an HTML calculator for something specific to your work/interests (budget tracker, fitness calculator, etc.)
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Add form validation and instant results
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact3" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection3" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(3)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 4 -->
+                    <div class="day-card" data-day="4">
+                        <div class="day-header">
+                            <div class="day-title">Day 4: Data Visualization Basics</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(4)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Give Claude some sample data (your expenses, book ratings, workout logs) and ask for an interactive chart
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Try different chart types: bar, line, pie, scatter plots
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact4" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection4" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(4)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 5 -->
+                    <div class="day-card" data-day="5">
+                        <div class="day-header">
+                            <div class="day-title">Day 5: CSS Animation & Effects</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(5)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Create an animated loading screen or a page with smooth transitions
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Ask for hover effects, fade-ins, or sliding elements
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact5" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection5" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(5)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 6 -->
+                    <div class="day-card" data-day="6">
+                        <div class="day-header">
+                            <div class="day-title">Day 6: Responsive Design</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(6)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Create a mobile-friendly photo gallery or portfolio page
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Test how it looks on different screen sizes
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact6" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection6" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(6)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 7 -->
+                    <div class="day-card" data-day="7">
+                        <div class="day-header">
+                            <div class="day-title">Day 7: Week 1 Mashup</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(7)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Create a mini web app that includes: data visualization, interactive elements, and animations
+                            </div>
+                            <div class="experiment">
+                                <strong>Reflection:</strong> What surprised you most about Claude's visual capabilities?
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact7" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection7" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(7)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 2: Advanced Analysis & Problem Solving -->
+            <div class="week-section">
+                <div class="week-header" onclick="toggleWeek(2)">
+                    <h2 style="margin: 0;">Week 2: Advanced Analysis & Problem Solving</h2>
+                    <span class="chevron" id="chevron2">▼</span>
+                </div>
+                <div class="week-content" id="week2">
+                    <!-- Day 8 -->
+                    <div class="day-card" data-day="8">
+                        <div class="day-header">
+                            <div class="day-title">Day 8: File Analysis Power</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(8)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Upload a CSV file (bank statements, fitness data, etc.) and ask Claude to find patterns and create visualizations
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Try different file formats - Excel, JSON, text files
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact8" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection8" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(8)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 9 -->
+                    <div class="day-card" data-day="9">
+                        <div class="day-header">
+                            <div class="day-title">Day 9: Complex Calculations</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(9)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Create a compound interest calculator that shows year-by-year breakdown with charts
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Try statistical analysis, probability calculations, or optimization problems
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact9" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection9" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(9)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 10 -->
+                    <div class="day-card" data-day="10">
+                        <div class="day-header">
+                            <div class="day-title">Day 10: Multi-step Problem Solving</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(10)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Ask Claude to plan a multi-city trip with budget constraints, then create a visual itinerary
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Break down a complex project into phases with timelines and dependencies
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact10" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection10" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(10)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 11 -->
+                    <div class="day-card" data-day="11">
+                        <div class="day-header">
+                            <div class="day-title">Day 11: Code Generation & Debugging</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(11)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Ask Claude to write a simple Python script for a task you need, then ask it to explain and improve it
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Try different programming languages and ask for code reviews
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact11" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection11" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(11)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 12 -->
+                    <div class="day-card" data-day="12">
+                        <div class="day-header">
+                            <div class="day-title">Day 12: Research & Synthesis</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(12)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Ask Claude to research a topic you're curious about and create a comprehensive report with sources
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Ask for different formats: executive summary, detailed analysis, comparison tables
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact12" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection12" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(12)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 13 -->
+                    <div class="day-card" data-day="13">
+                        <div class="day-header">
+                            <div class="day-title">Day 13: Creative Problem Solving</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(13)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Present Claude with a personal challenge and ask for 10 creative solutions, then develop the best one
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Use Claude for brainstorming sessions on work projects
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact13" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection13" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(13)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 14 -->
+                    <div class="day-card" data-day="14">
+                        <div class="day-header">
+                            <div class="day-title">Day 14: Week 2 Integration</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(14)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Choose a real problem in your life and create a complete solution using file analysis, calculations, visualizations, and web tools
+                            </div>
+                            <div class="experiment">
+                                <strong>Reflection:</strong> How has your approach to problem-solving changed?
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact14" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection14" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(14)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 3: Creative & Professional Applications -->
+            <div class="week-section">
+                <div class="week-header" onclick="toggleWeek(3)">
+                    <h2 style="margin: 0;">Week 3: Creative & Professional Applications</h2>
+                    <span class="chevron" id="chevron3">▼</span>
+                </div>
+                <div class="week-content" id="week3">
+                    <!-- Day 15 -->
+                    <div class="day-card" data-day="15">
+                        <div class="day-header">
+                            <div class="day-title">Day 15: Document Design</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(15)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Create a styled resume or project proposal with HTML/CSS that you could actually use
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Try different professional document types: reports, presentations, newsletters
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact15" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection15" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(15)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 16 -->
+                    <div class="day-card" data-day="16">
+                        <div class="day-header">
+                            <div class="day-title">Day 16: Interactive Presentations</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(16)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Create an interactive presentation about a topic you know well, with clickable sections and embedded media
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Add animations, progress bars, or interactive quizzes
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact16" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection16" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(16)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 17 -->
+                    <div class="day-card" data-day="17">
+                        <div class="day-header">
+                            <div class="day-title">Day 17: Creative Writing Tools</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(17)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Create an interactive story where readers make choices, or a poetry generator with different styles
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Try different creative formats: scripts, marketing copy, or interactive narratives
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact17" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection17" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(17)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 18 -->
+                    <div class="day-card" data-day="18">
+                        <div class="day-header">
+                            <div class="day-title">Day 18: Learning Tools</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(18)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Create an interactive quiz or flashcard system for something you're learning
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Build study guides, progress trackers, or educational games
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact18" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection18" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(18)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 19 -->
+                    <div class="day-card" data-day="19">
+                        <div class="day-header">
+                            <div class="day-title">Day 19: Personal Productivity Systems</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(19)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Create a personalized task manager, habit tracker, or project planning tool
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Add features like progress visualization, reminders, or goal tracking
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact19" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection19" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(19)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 20 -->
+                    <div class="day-card" data-day="20">
+                        <div class="day-header">
+                            <div class="day-title">Day 20: Visual Storytelling</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(20)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Create an infographic that tells the story of your year using personal data
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Try different storytelling formats: timelines, comparison graphics, journey maps
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact20" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection20" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(20)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 21 -->
+                    <div class="day-card" data-day="21">
+                        <div class="day-header">
+                            <div class="day-title">Day 21: Week 3 Showcase</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(21)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Create a comprehensive showcase of your skills - a website that demonstrates everything you've learned
+                            </div>
+                            <div class="experiment">
+                                <strong>Reflection:</strong> What type of content do you most enjoy creating with Claude?
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact21" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection21" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(21)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 4: Mastery & Integration -->
+            <div class="week-section">
+                <div class="week-header" onclick="toggleWeek(4)">
+                    <h2 style="margin: 0;">Week 4: Mastery & Integration</h2>
+                    <span class="chevron" id="chevron4">▼</span>
+                </div>
+                <div class="week-content" id="week4">
+                    <!-- Day 22 -->
+                    <div class="day-card" data-day="22">
+                        <div class="day-header">
+                            <div class="day-title">Day 22: Advanced Prompt Engineering</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(22)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Experiment with system prompts, role-playing, and output formatting to get exactly what you want
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Try chain-of-thought prompting, few-shot examples, and structured outputs
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact22" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection22" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(22)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 23 -->
+                    <div class="day-card" data-day="23">
+                        <div class="day-header">
+                            <div class="day-title">Day 23: Multi-Modal Integration</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(23)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Create a project that combines text analysis, data visualization, and interactive elements
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Upload images and ask Claude to analyze and create related content
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact23" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection23" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(23)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 24 -->
+                    <div class="day-card" data-day="24">
+                        <div class="day-header">
+                            <div class="day-title">Day 24: Automation & Workflows</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(24)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Develop templates and workflows for repetitive tasks using Claude
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Create reusable prompts for common work scenarios
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact24" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection24" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(24)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 25 -->
+                    <div class="day-card" data-day="25">
+                        <div class="day-header">
+                            <div class="day-title">Day 25: Collaborative Features</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(25)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Use Claude to facilitate a mock team meeting - create agendas, track decisions, assign action items
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Practice using Claude for project management and team communication
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact25" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection25" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(25)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 26 -->
+                    <div class="day-card" data-day="26">
+                        <div class="day-header">
+                            <div class="day-title">Day 26: Quality Control & Iteration</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(26)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Take a previous project and ask Claude to critique and improve it iteratively
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Learn to give Claude feedback to improve its outputs
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact26" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection26" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(26)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 27 -->
+                    <div class="day-card" data-day="27">
+                        <div class="day-header">
+                            <div class="day-title">Day 27: Real-World Application</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(27)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Use Claude to tackle a genuine challenge from your work or personal life
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Document the process and results
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact27" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection27" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(27)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 28 -->
+                    <div class="day-card" data-day="28">
+                        <div class="day-header">
+                            <div class="day-title">Day 28: Teaching Others</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(28)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Create a tutorial or guide teaching someone else how to use Claude effectively
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> Identify what you've learned that others might find most valuable
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact28" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection28" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(28)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 29 -->
+                    <div class="day-card" data-day="29">
+                        <div class="day-header">
+                            <div class="day-title">Day 29: Advanced Experimentation</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(29)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Try something completely new - combine features in unexpected ways or tackle an unusual challenge
+                            </div>
+                            <div class="experiment">
+                                <strong>Experiment:</strong> What's the most ambitious project you can complete in 5 minutes?
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact29" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection29" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(29)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Day 30 -->
+                    <div class="day-card" data-day="30">
+                        <div class="day-header">
+                            <div class="day-title">Day 30: Mastery Reflection</div>
+                            <input type="checkbox" class="complete-checkbox" onchange="toggleComplete(30)">
+                        </div>
+                        <div class="day-content">
+                            <div class="exercise">
+                                <strong>Exercise:</strong> Create a comprehensive review of your 30-day journey and plan your next steps
+                            </div>
+                            <div class="experiment">
+                                <strong>Reflection:</strong> How will you continue developing your Claude skills?
+                            </div>
+                            <div class="tracking-section">
+                                <div class="form-group">
+                                    <label class="form-label">Artifact Link/Description:</label>
+                                    <input type="text" id="artifact30" class="text-input" placeholder="Paste link or describe what you created...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Today's Reflection:</label>
+                                    <textarea id="reflection30" class="textarea" placeholder="What did you learn? What surprised you? What would you try differently?"></textarea>
+                                </div>
+                                <button class="btn save-btn" onclick="saveProgress(30)">Save Progress</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="user-management">
+                <button class="btn btn-secondary" onclick="switchUser()">👤 Switch User</button>
+                <button class="btn btn-secondary" onclick="exportUserData()">📊 Export My Data</button>
+                <button class="btn btn-secondary" onclick="showTeamReport()">📈 Team Report</button>
+                <button class="btn btn-ghost" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+            </div>
+        </div>
+
+        <!-- Team Report Modal -->
+        <div id="teamReportModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 style="margin: 0;">📈 Team Progress Report</h2>
+                    <span class="close" onclick="closeTeamReport()">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="summary-stats">
+                        <div class="summary-card">
+                            <div class="summary-number" id="totalParticipants">0</div>
+                            <div class="summary-label">Total Participants</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-number" id="activeParticipants">0</div>
+                            <div class="summary-label">Active This Week</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-number" id="avgCompletion">0%</div>
+                            <div class="summary-label">Avg Completion</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-number" id="totalArtifacts">0</div>
+                            <div class="summary-label">Total Artifacts</div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="participant-table">
+                            <thead>
+                                <tr>
+                                    <th>👤 Participant</th>
+                                    <th>✅ Days Completed</th>
+                                    <th>🔥 Current Streak</th>
+                                    <th>📊 Progress</th>
+                                    <th>🎯 Artifacts</th>
+                                    <th>📅 Last Active</th>
+                                </tr>
+                            </thead>
+                            <tbody id="participantTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="report-actions">
+                        <button class="export-btn" onclick="exportTeamReport()">📊 Export Team Report</button>
+                        <button class="copy-btn" onclick="copyTeamSummary()">📋 Copy Summary for Teams</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = null;
+        let allUserData = JSON.parse(localStorage.getItem('claudeMasteryUsers') || '{}');
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            showUserSelection();
+            
+            document.getElementById('userNameInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    setUser();
+                }
+            });
+        });
+
+        function showUserSelection() {
+            document.getElementById('userSelection').style.display = 'block';
+            document.getElementById('mainContent').classList.remove('active');
+            updateExistingUsersList();
+        }
+
+        function updateExistingUsersList() {
+            const usersList = document.getElementById('existingUsersList');
+            const users = Object.keys(allUserData);
+            
+            if (users.length === 0) {
+                usersList.innerHTML = '<p style="color: var(--dark-gray); font-style: italic;">No existing users yet. Be the first!</p>';
+                return;
+            }
+            
+            usersList.innerHTML = users.map(user => 
+                `<span class="user-chip" onclick="selectExistingUser('${user}')">${user}</span>`
+            ).join('');
+        }
+
+        function setUser() {
+            const userName = document.getElementById('userNameInput').value.trim();
+            if (!userName) {
+                alert('Please enter your name!');
+                return;
+            }
+            
+            if (userName.length > 30) {
+                alert('Name must be 30 characters or less!');
+                return;
+            }
+            
+            currentUser = userName;
+            
+            if (!allUserData[currentUser]) {
+                allUserData[currentUser] = {
+                    created: new Date().toISOString(),
+                    lastActive: new Date().toISOString()
+                };
+            } else {
+                allUserData[currentUser].lastActive = new Date().toISOString();
+            }
+            
+            saveAllUserData();
+            showMainContent();
+        }
+
+        function selectExistingUser(userName) {
+            currentUser = userName;
+            allUserData[currentUser].lastActive = new Date().toISOString();
+            saveAllUserData();
+            showMainContent();
+        }
+
+        function showMainContent() {
+            document.getElementById('userSelection').style.display = 'none';
+            document.getElementById('mainContent').classList.add('active');
+            document.getElementById('currentUserName').textContent = currentUser;
+            document.getElementById('userNameInput').value = '';
+            
+            loadUserProgress();
+            updateStats();
+        }
+
+        function switchUser() {
+            showUserSelection();
+        }
+
+        function toggleWeek(weekNum) {
+            const content = document.getElementById(`week${weekNum}`);
+            const chevron = document.getElementById(`chevron${weekNum}`);
+            
+            content.classList.toggle('expanded');
+            chevron.classList.toggle('rotated');
+        }
+
+        function toggleComplete(day) {
+            if (!currentUser) return;
+            
+            const checkbox = event.target;
+            const dayCard = document.querySelector(`[data-day="${day}"]`);
+            
+            if (!allUserData[currentUser]) {
+                allUserData[currentUser] = {};
+            }
+            
+            if (checkbox.checked) {
+                dayCard.classList.add('completed');
+                allUserData[currentUser][`day${day}_completed`] = true;
+                allUserData[currentUser][`day${day}_completedDate`] = new Date().toISOString();
+            } else {
+                dayCard.classList.remove('completed');
+                allUserData[currentUser][`day${day}_completed`] = false;
+            }
+            
+            saveAllUserData();
+            updateStats();
+        }
+
+        function saveProgress(day) {
+            if (!currentUser) return;
+            
+            const artifact = document.getElementById(`artifact${day}`).value;
+            const reflection = document.getElementById(`reflection${day}`).value;
+            
+            if (!allUserData[currentUser]) {
+                allUserData[currentUser] = {};
+            }
+            
+            allUserData[currentUser][`day${day}_artifact`] = artifact;
+            allUserData[currentUser][`day${day}_reflection`] = reflection;
+            
+            if (artifact && reflection) {
+                allUserData[currentUser][`day${day}_hasContent`] = true;
+            }
+            
+            saveAllUserData();
+            updateStats();
+            
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Saved!';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 1500);
+        }
+
+        function loadUserProgress() {
+            if (!currentUser || !allUserData[currentUser]) return;
+            
+            const userData = allUserData[currentUser];
+            
+            for (let day = 1; day <= 30; day++) {
+                if (userData[`day${day}_completed`]) {
+                    const checkbox = document.querySelector(`[data-day="${day}"] .complete-checkbox`);
+                    const dayCard = document.querySelector(`[data-day="${day}"]`);
+                    if (checkbox) {
+                        checkbox.checked = true;
+                        dayCard.classList.add('completed');
+                    }
+                }
+                
+                const artifactInput = document.getElementById(`artifact${day}`);
+                const reflectionInput = document.getElementById(`reflection${day}`);
+                
+                if (artifactInput && userData[`day${day}_artifact`]) {
+                    artifactInput.value = userData[`day${day}_artifact`];
+                }
+                
+                if (reflectionInput && userData[`day${day}_reflection`]) {
+                    reflectionInput.value = userData[`day${day}_reflection`];
+                }
+            }
+        }
+
+        function updateStats() {
+            if (!currentUser) return;
+            
+            const userData = allUserData[currentUser] || {};
+            let completedDays = 0;
+            let artifactsCreated = 0;
+            let currentStreak = 0;
+            let streakBroken = false;
+            
+            for (let day = 1; day <= 30; day++) {
+                if (userData[`day${day}_completed`]) {
+                    completedDays++;
+                    if (!streakBroken) currentStreak++;
+                } else {
+                    streakBroken = true;
+                }
+                
+                if (userData[`day${day}_artifact`]) {
+                    artifactsCreated++;
+                }
+            }
+            
+            document.getElementById('completedDays').textContent = completedDays;
+            document.getElementById('currentStreak').textContent = currentStreak;
+            document.getElementById('artifactsCreated').textContent = artifactsCreated;
+            
+            const progressPercent = (completedDays / 30) * 100;
+            document.getElementById('progressFill').style.width = progressPercent + '%';
+            document.getElementById('progressText').textContent = Math.round(progressPercent) + '% Complete';
+        }
+
+        function saveAllUserData() {
+            localStorage.setItem('claudeMasteryUsers', JSON.stringify(allUserData));
+        }
+
+        function exportUserData() {
+            if (!currentUser) return;
+            
+            const userData = allUserData[currentUser];
+            const exportData = {
+                user: currentUser,
+                exported: new Date().toISOString(),
+                data: userData
+            };
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `claude-mastery-${currentUser}-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        function toggleDarkMode() {
+            document.body.style.background = document.body.style.background === 'rgb(30, 30, 30)' ? '#F5F5F5' : '#1E1E1E';
+            document.body.style.color = document.body.style.color === 'rgb(224, 224, 224)' ? '#212121' : '#E0E0E0';
+        }
+
+        function showTeamReport() {
+            generateTeamReport();
+            document.getElementById('teamReportModal').style.display = 'block';
+        }
+
+        function closeTeamReport() {
+            document.getElementById('teamReportModal').style.display = 'none';
+        }
+
+        function generateTeamReport() {
+            if (currentUser && !allUserData[currentUser]) {
+                allUserData[currentUser] = {
+                    created: new Date().toISOString(),
+                    lastActive: new Date().toISOString()
+                };
+                saveAllUserData();
+            }
+
+            const users = Object.keys(allUserData);
+            const now = new Date();
+            const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+            
+            let totalParticipants = users.length;
+            let activeParticipants = 0;
+            let totalDaysCompleted = 0;
+            let totalArtifacts = 0;
+            let participantData = [];
+
+            users.forEach(userName => {
+                const userData = allUserData[userName] || {};
+                let completedDays = 0;
+                let currentStreak = 0;
+                let artifactsCreated = 0;
+                let streakBroken = false;
+
+                for (let day = 1; day <= 30; day++) {
+                    if (userData[`day${day}_completed`]) {
+                        completedDays++;
+                        totalDaysCompleted++;
+                        if (!streakBroken) currentStreak++;
+                    } else {
+                        streakBroken = true;
+                    }
+                    
+                    if (userData[`day${day}_artifact`] && userData[`day${day}_artifact`].trim()) {
+                        artifactsCreated++;
+                        totalArtifacts++;
+                    }
+                }
+
+                const lastActive = userData.lastActive ? new Date(userData.lastActive) : null;
+                const isActiveThisWeek = lastActive && lastActive > oneWeekAgo;
+                if (isActiveThisWeek) activeParticipants++;
+
+                participantData.push({
+                    name: userName,
+                    completedDays,
+                    currentStreak,
+                    progress: Math.round((completedDays / 30) * 100),
+                    artifactsCreated,
+                    lastActive,
+                    isActiveThisWeek
+                });
+            });
+
+            participantData.sort((a, b) => {
+                if (b.progress !== a.progress) return b.progress - a.progress;
+                return b.currentStreak - a.currentStreak;
+            });
+
+            document.getElementById('totalParticipants').textContent = totalParticipants;
+            document.getElementById('activeParticipants').textContent = activeParticipants;
+            document.getElementById('avgCompletion').textContent = 
+                totalParticipants > 0 ? Math.round(totalDaysCompleted / totalParticipants / 30 * 100) + '%' : '0%';
+            document.getElementById('totalArtifacts').textContent = totalArtifacts;
+
+            const tableBody = document.getElementById('participantTableBody');
+            tableBody.innerHTML = participantData.map(participant => {
+                const streakClass = participant.currentStreak >= 7 ? 'high' : 
+                                  participant.currentStreak >= 3 ? 'medium' : '';
+                
+                const lastActiveText = participant.lastActive ? 
+                    formatLastActive(participant.lastActive) : 'Never';
+                
+                const lastActiveClass = participant.isActiveThisWeek ? 'recent' : '';
+
+                return `
+                    <tr>
+                        <td><strong>${participant.name}</strong></td>
+                        <td><strong>${participant.completedDays}/30</strong></td>
+                        <td><span class="streak-badge ${streakClass}">${participant.currentStreak} days</span></td>
+                        <td>
+                            <div class="progress-cell">
+                                <div class="mini-progress-bar">
+                                    <div class="mini-progress-fill" style="width: ${participant.progress}%"></div>
+                                </div>
+                                <span class="progress-percentage">${participant.progress}%</span>
+                            </div>
+                        </td>
+                        <td><strong>${participant.artifactsCreated}</strong></td>
+                        <td><span class="last-active ${lastActiveClass}">${lastActiveText}</span></td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function formatLastActive(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 0) return 'Today';
+            if (diffDays === 1) return 'Yesterday';
+            if (diffDays < 7) return `${diffDays} days ago`;
+            if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+            return date.toLocaleDateString();
+        }
+
+        function exportTeamReport() {
+            if (currentUser && !allUserData[currentUser]) {
+                allUserData[currentUser] = {
+                    created: new Date().toISOString(),
+                    lastActive: new Date().toISOString()
+                };
+                saveAllUserData();
+            }
+
+            const users = Object.keys(allUserData);
+            const reportData = {
+                generated: new Date().toISOString(),
+                summary: {
+                    totalParticipants: users.length,
+                    activeThisWeek: 0,
+                    totalArtifacts: 0,
+                    avgCompletion: 0
+                },
+                participants: []
+            };
+
+            const now = new Date();
+            const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+            let totalDaysCompleted = 0;
+            let totalArtifacts = 0;
+
+            users.forEach(userName => {
+                const userData = allUserData[userName] || {};
+                let completedDays = 0;
+                let currentStreak = 0;
+                let artifactsCreated = 0;
+                let streakBroken = false;
+
+                for (let day = 1; day <= 30; day++) {
+                    if (userData[`day${day}_completed`]) {
+                        completedDays++;
+                        totalDaysCompleted++;
+                        if (!streakBroken) currentStreak++;
+                    } else {
+                        streakBroken = true;
+                    }
+                    
+                    if (userData[`day${day}_artifact`] && userData[`day${day}_artifact`].trim()) {
+                        artifactsCreated++;
+                        totalArtifacts++;
+                    }
+                }
+
+                const lastActive = userData.lastActive ? new Date(userData.lastActive) : null;
+                const isActiveThisWeek = lastActive && lastActive > oneWeekAgo;
+                if (isActiveThisWeek) reportData.summary.activeThisWeek++;
+
+                reportData.participants.push({
+                    name: userName,
+                    completedDays,
+                    currentStreak,
+                    progress: Math.round((completedDays / 30) * 100),
+                    artifactsCreated,
+                    lastActive: userData.lastActive,
+                    created: userData.created
+                });
+            });
+
+            reportData.summary.totalArtifacts = totalArtifacts;
+            reportData.summary.avgCompletion = users.length > 0 ? 
+                Math.round(totalDaysCompleted / users.length / 30 * 100) : 0;
+
+            const dataStr = JSON.stringify(reportData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `claude-mastery-team-report-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        function copyTeamSummary() {
+            if (currentUser && !allUserData[currentUser]) {
+                allUserData[currentUser] = {
+                    created: new Date().toISOString(),
+                    lastActive: new Date().toISOString()
+                };
+                saveAllUserData();
+            }
+
+            const users = Object.keys(allUserData);
+            const now = new Date();
+            const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+            
+            let activeParticipants = 0;
+            let totalDaysCompleted = 0;
+            let totalArtifacts = 0;
+            let topPerformers = [];
+
+            users.forEach(userName => {
+                const userData = allUserData[userName] || {};
+                let completedDays = 0;
+                let currentStreak = 0;
+                let artifactsCreated = 0;
+                let streakBroken = false;
+
+                for (let day = 1; day <= 30; day++) {
+                    if (userData[`day${day}_completed`]) {
+                        completedDays++;
+                        totalDaysCompleted++;
+                        if (!streakBroken) currentStreak++;
+                    } else {
+                        streakBroken = true;
+                    }
+                    
+                    if (userData[`day${day}_artifact`] && userData[`day${day}_artifact`].trim()) {
+                        artifactsCreated++;
+                        totalArtifacts++;
+                    }
+                }
+
+                const lastActive = userData.lastActive ? new Date(userData.lastActive) : null;
+                if (lastActive && lastActive > oneWeekAgo) activeParticipants++;
+
+                topPerformers.push({
+                    name: userName,
+                    completedDays,
+                    currentStreak,
+                    progress: Math.round((completedDays / 30) * 100)
+                });
+            });
+
+            topPerformers.sort((a, b) => b.progress - a.progress);
+            const top3 = topPerformers.slice(0, 3);
+
+            const avgCompletion = users.length > 0 ? Math.round(totalDaysCompleted / users.length / 30 * 100) : 0;
+
+            const summary = `🎯 **Claude Mastery Challenge - Team Update**
+
+📊 **Team Stats:**
+• ${users.length} total participants
+• ${activeParticipants} active this week  
+• ${avgCompletion}% average completion
+• ${totalArtifacts} total artifacts created
+
+🏆 **Top Performers:**
+${top3.map((p, i) => `${i + 1}. ${p.name}: ${p.progress}% complete (${p.currentStreak} day streak)`).join('\n')}
+
+Keep up the amazing work, everyone! 🚀`;
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(summary).then(() => {
+                    alert('Team summary copied to clipboard! 📋');
+                }).catch(() => {
+                    fallbackCopy(summary);
+                });
+            } else {
+                fallbackCopy(summary);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                alert('Team summary copied to clipboard! 📋');
+            } catch (err) {
+                console.log('Team Summary:', text);
+                alert('Copy failed. Check console for summary text.');
+            }
+            document.body.removeChild(textArea);
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('teamReportModal');
+            if (event.target === modal) {
+                closeTeamReport();
+            }
+        }
+    </script>
+</body>
+</html>
